@@ -7,18 +7,22 @@ import React from 'react';
 class MyForm extends React.Component {
 		constructor(props) {
 		super(props);		
+		this.state = { value: '' };
+
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);	
 	}
 
 	handleSubmit(event) {
-		this.props.actions.addToStore(this.props.value);
+		this.props.actions.addToStore(this.state.value);
 		this.props.actions.updateFromService();
 		event.preventDefault();
 	}
 
 	handleChange(event) {
-		this.props.actions.saveChangedValue(event.target.value);		
+		this.setState({ value :event.target.value });
+		//this.props.actions.saveChangedValue(event.target.value);	
+		event.preventDefault();	
 	}
 	render () {
 		const listItems = this.props.values.map((value, index) =>
@@ -30,7 +34,7 @@ class MyForm extends React.Component {
 				<form>
 					<label>
 					Entered Value:
-					<input type="text" name="name" value={this.props.value} onChange={this.handleChange}/>
+					<input type="text" name="name" value={this.state.value} onChange={this.handleChange}/>
 					</label>
 					<h4>Entered Value: {this.props.value}</h4>
 					<input type="button" value="Submit" onClick={this.handleSubmit} />
@@ -50,8 +54,7 @@ MyForm.propTypes = {
 };
 
 MyForm.defaultProps = {
-	value : '',
-	values : ['e','eeeeeeeee']
+	
 }
 
 

@@ -1,6 +1,5 @@
 
 import objectAssign from 'object-assign';
-
 let delay = 2000;
 let value = {"text": "Jyoti"};
 export default class AppApi {
